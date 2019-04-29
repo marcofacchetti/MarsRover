@@ -43,6 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomDataType\CardinalDirection.cs" />
+    <Compile Include="CustomDataType\Coords.cs" />
+    <Compile Include="CustomDataType\Interface\IPlateau.cs" />
+    <Compile Include="CustomDataType\Interface\IRover.cs" />
+    <Compile Include="CustomDataType\Plateau.cs" />
+    <Compile Include="CustomDataType\Rover.cs" />
+    <Compile Include="CustomDataType\RoverMovement.cs" />
+    <Compile Include="CustomDataType\Size.cs" />
+    <Compile Include="Exception\RoverException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
