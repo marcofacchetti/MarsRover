@@ -93,20 +93,23 @@ namespace MarsRover.CustomDataType
                         }
                     case RoverMovement.Forward:
                         {
+                            moveForward();
                             // move forward
-                            if (canMoveForward())
+                            /*if (canMoveForward())
                                 moveForward();
                             else
                                 throw new RoverMovementException("Cannot move forward..");                                    
+                                */
                             break;
                         }
                     case RoverMovement.Backward:
                         {
                             // move backward
-                            if (canMoveBackward())
+                            moveBackward();
+                            /*if (canMoveBackward())
                                 moveBackward();
                             else
-                                throw new RoverMovementException("Cannot move barckward..");
+                                throw new RoverMovementException("Cannot move barckward..");*/
                             break;
                         }
                     default:
@@ -164,20 +167,19 @@ namespace MarsRover.CustomDataType
 
         private void moveForward()
         {
-
             switch (Direction)
             {
-                case CardinalDirection.North:                   
-                    Position.Y += 1;
+                case CardinalDirection.North:
+                    Position.Y = Position.Y < Plateau.GetSize().Height ? Position.Y + 1 : Plateau.GetSize().MinHeight;
                     break;
                 case CardinalDirection.East:
-                    Position.X += 1;
+                    Position.X = Position.X < Plateau.GetSize().Width ? Position.X + 1: Plateau.GetSize().MinWidth;
                     break;
                 case CardinalDirection.South:
-                    Position.Y -= 1;
+                    Position.Y = Position.Y > Plateau.GetSize().MinHeight ? Position.Y - 1 : Plateau.GetSize().Height;
                     break;
                 case CardinalDirection.West:
-                    Position.X -= 1;
+                    Position.X = Position.X > Plateau.GetSize().MinWidth ? Position.X - 1 : Plateau.GetSize().Width;
                     break;
             }
         }
@@ -188,16 +190,16 @@ namespace MarsRover.CustomDataType
             switch (Direction)
             {
                 case CardinalDirection.North:
-                    Position.Y -= 1;
+                    Position.Y = Position.Y> Plateau.GetSize().MinHeight? Position.Y-1: Plateau.GetSize().Height;
                     break;
                 case CardinalDirection.East:
-                    Position.X -= 1;
+                    Position.X = Position.X> Plateau.GetSize().MinWidth? Position.X-1:Plateau.GetSize().Width;
                     break;
                 case CardinalDirection.South:
-                    Position.Y += 1;
+                    Position.Y = Position.Y < Plateau.GetSize().Height ? Position.Y + 1 : Plateau.GetSize().MinHeight;
                     break;
                 case CardinalDirection.West:
-                    Position.X += 1;
+                    Position.X = Position.X < Plateau.GetSize().Width ? Position.X + 1 : Plateau.GetSize().MinWidth;
                     break;
             }
         }

@@ -11,5 +11,8 @@ namespace MarsRover.CustomDataType.Interface
         void SetSize(Size size);
         Size GetSize();
         bool IsValid(Coords point);
+        void AddObstacle(Coords point);
+        void RemoveObstacle(Coords point);
+
     }
 }

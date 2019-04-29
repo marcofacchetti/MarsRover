@@ -10,6 +10,8 @@ namespace MarsRover.CustomDataType
     public class Plateau : IPlateau
     {
         private Size size { get; set; }
+        private List<Coords> Obstacles { get; set; }
+
 
         public void SetSize(Size size)
         {
@@ -26,6 +28,16 @@ namespace MarsRover.CustomDataType
             var isValidX = point.X >= 0 && point.X <= size.Width;
             var isValidY = point.Y >= 0 && point.Y <= size.Height;
             return isValidX && isValidY;
+        }
+
+        public void AddObstacle(Coords point)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveObstacle(Coords point)
+        {
+            throw new NotImplementedException();
         }
     }
 }

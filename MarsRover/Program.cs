@@ -18,10 +18,10 @@ namespace MarsRover
             Coords position = new Coords(0, 0);
 
             
-            Rover rover = new Rover(plateau, position, CardinalDirection.West);
+            Rover rover = new Rover(plateau, position, CardinalDirection.North);
             try
             {
-                rover.RunCommands("BBBBBFFFFFRRRR");
+                rover.RunCommands("FFFFFFFFB");
             }
             catch (RoverCommandException ex)
             {
