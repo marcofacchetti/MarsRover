@@ -14,20 +14,19 @@ namespace MarsRover
         {
 
             Plateau plateau = new Plateau();
-            plateau.SetSize(new Size(5, 5));
+            plateau.SetSize(new Size(5, 5));            
             Coords position = new Coords(0, 0);
-
             
             Rover rover = new Rover(plateau, position, CardinalDirection.North);
             try
             {
-                rover.RunCommands("FFFFFFFFB");
+                rover.RunCommands("FFFFFRFFFFFRFFFFFRFFFFFR");
             }
             catch (RoverCommandException ex)
             {
                 System.Console.WriteLine(ex.Message);
             }
-            catch (RoverMovementException ex)
+            catch (RoverObstacleException ex)
             {
                 System.Console.WriteLine(ex.Message);
             }catch (System.Exception ex)

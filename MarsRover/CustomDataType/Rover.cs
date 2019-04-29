@@ -19,7 +19,7 @@ namespace MarsRover.CustomDataType
         {
             this.Plateau= plateau;
             this.Position = position;
-            this.Direction= direction;
+            this.Direction= direction;            
         }
 
         public void SetPosition(int x, int y, CardinalDirection direction)
@@ -79,39 +79,18 @@ namespace MarsRover.CustomDataType
             if (isValidCommand(command)){
                 switch (command)
                 {
-                    case RoverMovement.Left:
-                        {
-                            // turn left
-                            turnLeft();
-                            break;
-                        }
-                    case RoverMovement.Right:
-                        {
-                            // turn right
-                            turnRigth();
-                            break;
-                        }
-                    case RoverMovement.Forward:
-                        {
-                            moveForward();
-                            // move forward
-                            /*if (canMoveForward())
-                                moveForward();
-                            else
-                                throw new RoverMovementException("Cannot move forward..");                                    
-                                */
-                            break;
-                        }
+                    case RoverMovement.Left:                                                   
+                        turnLeft();
+                        break;                        
+                    case RoverMovement.Right:                    
+                        turnRigth();
+                        break;                       
+                    case RoverMovement.Forward:                        
+                        moveForward();                            
+                        break;                        
                     case RoverMovement.Backward:
-                        {
-                            // move backward
-                            moveBackward();
-                            /*if (canMoveBackward())
-                                moveBackward();
-                            else
-                                throw new RoverMovementException("Cannot move barckward..");*/
-                            break;
-                        }
+                        moveBackward();
+                        break;
                     default:
                         {
                             break;
@@ -127,81 +106,64 @@ namespace MarsRover.CustomDataType
            
         }
 
-        private bool canMoveForward()
+        private void raiseObstacleException(int positionX, int positionY)
         {
-            // Vado in avanti rispetto al mio verso...
-            
-            switch (Direction)
-            {
-                case CardinalDirection.North:
-                    return Position.Y < Plateau.GetSize().Height ? true : false;
-                case CardinalDirection.East:
-                    return Position.X < Plateau.GetSize().Width ? true : false;
-                case CardinalDirection.South:
-                    return Position.Y > Plateau.GetSize().MinHeight ? true : false;
-                case CardinalDirection.West:
-                    return Position.X > Plateau.GetSize().MinWidth ? true : false;
-                default:
-                    return false;
-            }           
+            throw new RoverObstacleException(String.Format("Found obstacle at position {0} {1}", positionX,positionY));
         }
 
-        private bool canMoveBackward()
+        private void setNewPosition(int x, int y)
         {
-
-            // Vado indiero rispetto al mio verso...
-            switch (Direction)
+            if (!Plateau.FoundObstacle(new Coords(x, y)))
             {
-                case CardinalDirection.North:
-                    return Position.Y > Plateau.GetSize().MinHeight ? true : false;
-                case CardinalDirection.East:
-                    return Position.X > Plateau.GetSize().MinWidth ? true : false;
-                case CardinalDirection.South:
-                    return Position.Y < Plateau.GetSize().Height ? true : false;
-                case CardinalDirection.West:
-                    return Position.X < Plateau.GetSize().Width ? true : false;
-                default:
-                    return false;
+                Position.X = x;
+                Position.Y = y;
             }
+            else
+                raiseObstacleException(x, y);
         }
 
         private void moveForward()
         {
+            int x=Position.X;
+            int y=Position.Y;
             switch (Direction)
             {
                 case CardinalDirection.North:
-                    Position.Y = Position.Y < Plateau.GetSize().Height ? Position.Y + 1 : Plateau.GetSize().MinHeight;
+                    y= Position.Y < Plateau.GetSize().Height ? Position.Y + 1 : Plateau.GetSize().MinHeight;                    
                     break;
                 case CardinalDirection.East:
-                    Position.X = Position.X < Plateau.GetSize().Width ? Position.X + 1: Plateau.GetSize().MinWidth;
-                    break;
+                    x= Position.X < Plateau.GetSize().Width ? Position.X + 1 : Plateau.GetSize().MinWidth;                    
+                    break;                                        
                 case CardinalDirection.South:
-                    Position.Y = Position.Y > Plateau.GetSize().MinHeight ? Position.Y - 1 : Plateau.GetSize().Height;
+                    y= Position.Y > Plateau.GetSize().MinHeight ? Position.Y - 1 : Plateau.GetSize().Height;                    
                     break;
                 case CardinalDirection.West:
-                    Position.X = Position.X > Plateau.GetSize().MinWidth ? Position.X - 1 : Plateau.GetSize().Width;
+                    x = Position.X > Plateau.GetSize().MinWidth ? Position.X - 1 : Plateau.GetSize().Width;                    
                     break;
             }
+            setNewPosition(x, y);           
         }
 
         private void moveBackward()
         {
-
+            int x=Position.X;
+            int y=Position.Y;
             switch (Direction)
             {
                 case CardinalDirection.North:
-                    Position.Y = Position.Y> Plateau.GetSize().MinHeight? Position.Y-1: Plateau.GetSize().Height;
+                    y = Position.Y > Plateau.GetSize().MinHeight ? Position.Y - 1 : Plateau.GetSize().Height;                    
                     break;
                 case CardinalDirection.East:
-                    Position.X = Position.X> Plateau.GetSize().MinWidth? Position.X-1:Plateau.GetSize().Width;
+                    x= Position.X> Plateau.GetSize().MinWidth? Position.X-1:Plateau.GetSize().Width;                    
                     break;
                 case CardinalDirection.South:
-                    Position.Y = Position.Y < Plateau.GetSize().Height ? Position.Y + 1 : Plateau.GetSize().MinHeight;
+                    y = Position.Y < Plateau.GetSize().Height ? Position.Y + 1 : Plateau.GetSize().MinHeight;                    
                     break;
                 case CardinalDirection.West:
-                    Position.X = Position.X < Plateau.GetSize().Width ? Position.X + 1 : Plateau.GetSize().MinWidth;
+                    x = Position.X < Plateau.GetSize().Width ? Position.X + 1 : Plateau.GetSize().MinWidth;                    
                     break;
             }
+            setNewPosition(x, y);
         }
 
         private void turnLeft()

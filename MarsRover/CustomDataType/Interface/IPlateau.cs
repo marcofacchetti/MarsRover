@@ -13,6 +13,7 @@ namespace MarsRover.CustomDataType.Interface
         bool IsValid(Coords point);
         void AddObstacle(Coords point);
         void RemoveObstacle(Coords point);
-
+        bool FoundObstacle(Coords point);
+        List<Coords> GetAllObstacle();
     }
 }
