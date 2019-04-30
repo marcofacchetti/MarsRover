@@ -73,7 +73,7 @@ namespace MarsRover.Test
         }
 
         [TestMethod]
-        public void Test_Go_forward_1_Step_and_backward_1_Step()
+        public void Test_Go_Forward_1_Step_And_Backward_1_Step()
         {
             rover.RunCommands("FB");
             Coords coords = rover.GetPosition();
@@ -84,13 +84,98 @@ namespace MarsRover.Test
 
 
         [TestMethod]
-        public void Test_Go_forward_1_Step_and_backward_2_Step()
+        public void Test_Go_Forward_1_Step_And_Backward_2()
         {
             rover.RunCommands("FBB");
             Coords coords = rover.GetPosition();
             CardinalDirection direction = rover.GetDirection();
             Assert.IsTrue(coords.X == 0 && coords.Y == 5, "Position must be 0,5");
             Assert.IsTrue(direction == CardinalDirection.North, "Direction must be N");
+        }
+
+        [TestMethod]
+        public void Test_Go_Forward_1_Step_South_Direction()
+        {
+            rover.SetPosition(0, 0, CardinalDirection.South);
+            rover.RunCommands("F");
+            Coords coords = rover.GetPosition();
+            CardinalDirection direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 0 && coords.Y == 5, "Position must be 0,5");
+            Assert.IsTrue(direction == CardinalDirection.South, "Direction must be S");
+        }
+
+        [TestMethod]
+        public void Test_Go_Backward_5_Step_South_Direction()
+        {
+            rover.SetPosition(0, 0, CardinalDirection.South);
+            rover.RunCommands("BBBBBB");
+            Coords coords = rover.GetPosition();
+            CardinalDirection direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 0 && coords.Y == 0, "Position must be 0,0");
+            Assert.IsTrue(direction == CardinalDirection.South, "Direction must be S");
+        }
+
+        [TestMethod]
+        public void Test_Perimeter_Plateau_Move_Forward()
+        {            
+            rover.RunCommands("FFFFF");
+            Coords coords = rover.GetPosition();
+            CardinalDirection direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 0 && coords.Y == 5, "Position must be 0,5");
+            Assert.IsTrue(direction == CardinalDirection.North, "Direction must be N");
+
+            rover.RunCommands("RFFFFF");
+            coords = rover.GetPosition();
+            direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 5 && coords.Y == 5, "Position must be 5,5");
+            Assert.IsTrue(direction == CardinalDirection.East, "Direction must be E");
+
+            rover.RunCommands("RFFFFF");
+            coords = rover.GetPosition();
+            direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 5 && coords.Y == 0, "Position must be 5,0");
+            Assert.IsTrue(direction == CardinalDirection.South, "Direction must be S");
+
+            rover.RunCommands("RFFFFF");
+            coords = rover.GetPosition();
+            direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 0 && coords.Y == 0, "Position must be 0,0");
+            Assert.IsTrue(direction == CardinalDirection.West, "Direction must be W");
+
+            rover.RunCommands("R");
+            coords = rover.GetPosition();
+            direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 0 && coords.Y == 0, "Position must be 0,0");
+            Assert.IsTrue(direction == CardinalDirection.North, "Direction must be N");
+        }
+
+        [TestMethod]
+        public void Test_Perimeter_Plateau_Move_Backward()
+        {            
+            rover.RunCommands("LBBBBB");
+            Coords coords = rover.GetPosition();
+            CardinalDirection direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 5 && coords.Y == 0, "Position must be 5,0");
+            Assert.IsTrue(direction == CardinalDirection.West, "Direction must be W");
+
+            rover.RunCommands("LBBBBB");
+            coords = rover.GetPosition();
+            direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 5 && coords.Y == 5, "Position must be 5,5");
+            Assert.IsTrue(direction == CardinalDirection.South, "Direction must be S");
+
+            rover.RunCommands("LBBBBB");
+            coords = rover.GetPosition();
+            direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 0 && coords.Y == 5, "Position must be 0,5");
+            Assert.IsTrue(direction == CardinalDirection.East, "Direction must be E");
+
+            rover.RunCommands("LBBBBB");
+            coords = rover.GetPosition();
+            direction = rover.GetDirection();
+            Assert.IsTrue(coords.X == 0 && coords.Y == 0, "Position must be 0,0");
+            Assert.IsTrue(direction == CardinalDirection.North, "Direction must be W");
+           
         }
     }
 }
