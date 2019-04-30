@@ -17,4 +17,9 @@ namespace MarsRover.Exception
     {
         public RoverObstacleException(string message) : base(message) { }
     }
+
+    public class RoverInitException : System.Exception
+    {
+       public RoverInitException(string message) : base(message) { }
+    }
 }

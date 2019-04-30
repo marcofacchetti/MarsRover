@@ -11,17 +11,30 @@ namespace MarsRover.CustomDataType
     {
         private Size size { get; set; }
         private List<Coords> Obstacles { get; set; } = new List<Coords>();
-        
+
+        /// <summary>
+        /// Set plateau size
+        /// </summary>
+        /// <param name="size"></param>
         public void SetSize(Size size)
         {
             this.size = size;
         }
 
+        /// <summary>
+        /// Get plateau size
+        /// </summary>
+        /// <returns></returns>
         public Size GetSize()
         {
             return size;
         }
 
+        /// <summary>
+        /// Check point is valid
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool IsValid(Coords point)
         {
             var isValidX = point.X >= 0 && point.X <= size.Width;
@@ -29,6 +42,11 @@ namespace MarsRover.CustomDataType
             return isValidX && isValidY;
         }
 
+        /// <summary>
+        /// Check if obstacle exist
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
         public bool FoundObstacle(Coords point)
         {
             return this.Obstacles.Any(o => o.X == point.X && o.Y == point.Y);
@@ -39,6 +57,11 @@ namespace MarsRover.CustomDataType
             return this.Obstacles.FirstOrDefault(o => o.X == point.X && o.Y == point.Y);
         }
 
+
+        /// <summary>
+        /// Add obstacle
+        /// </summary>
+        /// <param name="point"></param>
         public void AddObstacle(Coords point)
         {
             if (IsValid(point) && !FoundObstacle(point) )
@@ -47,8 +70,10 @@ namespace MarsRover.CustomDataType
             }            
         }
 
-
-
+        /// <summary>
+        /// Remove obstacle
+        /// </summary>
+        /// <param name="point"></param>
         public void RemoveObstacle(Coords point)
         {
             if (IsValid(point))
@@ -58,6 +83,11 @@ namespace MarsRover.CustomDataType
                     this.Obstacles.Remove(obstacle);
             }
         }
+
+        /// <summary>
+        ///  Get all obstacle
+        /// </summary>
+        /// <returns></returns>
 
         public List<Coords> GetAllObstacle()
         {

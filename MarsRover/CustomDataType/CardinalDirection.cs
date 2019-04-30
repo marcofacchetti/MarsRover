@@ -8,7 +8,12 @@ namespace MarsRover.CustomDataType
 {
     public enum CardinalDirection
     {
-        North=1,
+        /*
+        *    N
+        * W     E
+        *    S
+        */
+        North = 1,
         East=2,
         South=3,
         West=4

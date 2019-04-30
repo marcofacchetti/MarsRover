@@ -1,11 +1,12 @@
 ﻿using System;
 using MarsRover.CustomDataType;
+using MarsRover.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MarsRover.Test
 {
     [TestClass]
-    public class UnitTestMovement
+    public class RoverUnitTestMovement
     {
 
         private Plateau plateau = new Plateau();
@@ -174,8 +175,15 @@ namespace MarsRover.Test
             coords = rover.GetPosition();
             direction = rover.GetDirection();
             Assert.IsTrue(coords.X == 0 && coords.Y == 0, "Position must be 0,0");
-            Assert.IsTrue(direction == CardinalDirection.North, "Direction must be W");
-           
+            Assert.IsTrue(direction == CardinalDirection.North, "Direction must be W");           
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(RoverCommandException))]
+        public void Test_InvalidCommand()
+        {
+            rover.RunCommands("X");
+        }
+
     }
 }

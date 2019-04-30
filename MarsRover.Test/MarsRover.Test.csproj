@@ -8,8 +8,8 @@
     <ProjectGuid>{826F726C-44EC-40B4-A4A3-B5A235CA78FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MarsRover.Tes</RootNamespace>
-    <AssemblyName>MarsRover.Tes</AssemblyName>
+    <RootNamespace>MarsRover.Test</RootNamespace>
+    <AssemblyName>MarsRover.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,8 +49,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RoverUnitTest.cs" />
+    <Compile Include="RoverUnitTestMovement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PlateauObstacleUnitTest.cs" />
+    <Compile Include="RoverPositionUnitTest.cs" />
+    <Compile Include="RoverUnitTestMovementWithObstacle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
