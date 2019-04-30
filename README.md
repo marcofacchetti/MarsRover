@@ -44,5 +44,5 @@ Il comando F (Forward) corrisponde al movimento in avanti rispetto alla direzion
 Il comando B (Backward) corrisponde al movimento all'indietro rispetto alla direzione del Rover. Lo spostamento in base alla direzione del Rover modifica la coordinata X o Y. Il sistema considera la sfericità del pianeta.
 
 # Output
-Il sistema dato un input restituisce la nuova posizione del Rover (coordinate e direzione). Nel caso di eccezioni il sistema genera eccezioni custom.
+Il sistema dato un input restituisce la nuova posizione del Rover (coordinate e direzione). Nel caso di anomalie il sistema genera eccezioni custom.
 
