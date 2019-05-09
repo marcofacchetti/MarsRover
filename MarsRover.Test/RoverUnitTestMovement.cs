@@ -1,4 +1,4 @@
-﻿ rover.RunCommands("FFFFFRFFFFFRFFFFFRFFFFFR");using System;
+﻿ using System;
 using MarsRover.CustomDataType;
 using MarsRover.Exception;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
